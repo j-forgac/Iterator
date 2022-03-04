@@ -1,10 +1,8 @@
-val primeNumbers = mutableListOf(2)
-
-fun Int.getPrimeNumber(): Int{
-    var num = primeNumbers.last()+1
+fun MutableList<Int>.getPrimeNumber(): Int{
+    var num = this.last()+1
     while (true){
-        if(primeNumbers.none { num%it == 0 }){
-            primeNumbers.add(num)
+        if(this.none { num%it == 0 }){
+            this.add(num)
             return num
         }
         num++
@@ -12,6 +10,7 @@ fun Int.getPrimeNumber(): Int{
 }
 
 class PrimeIterator(private val maxCount: Int): Iterator<Int> {
+    val primeNumbers = mutableListOf(2)
 
     var counter = 0
 
@@ -20,7 +19,7 @@ class PrimeIterator(private val maxCount: Int): Iterator<Int> {
     override fun next(): Int {
         check(hasNext()) {"Already gone through $maxCount"}
         counter++
-        return counter.getPrimeNumber()
+        return primeNumbers.getPrimeNumber()
     }
 
 }
